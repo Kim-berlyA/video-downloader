@@ -109,6 +109,7 @@ def download_video(output_path='savenow-downloads'):
         ydl_opts = {
             'format': format_string,
             'outtmpl': f'{output_path}/%(title)s-%(height)sp.%(ext)s',
+            "merge_output_format": "mp4",
             'quiet': False,
         }
 

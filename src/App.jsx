@@ -14,11 +14,10 @@ function App() {
   const [thumbnail, setThumbnail] = useState('');
   const [title, setTitle] = useState('');
   const [hasAudio, setHasAudio] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [qualityErrorMessage, setQualityErrorMessage] = useState('');
   const [downloadErrorMessage, setDownloadErrorMessage] = useState('');
-  const [downloadCompleted, setDownloadCompleted] = useState(false);
+  const [downloadStatus, setDownloadStatus] = useState(null);
 
   function clearStates() {
     setQualities(null);
@@ -27,7 +26,7 @@ function App() {
     setHasAudio(null);
     setQualityErrorMessage(null);
     setDownloadErrorMessage(null);
-    setDownloadCompleted(false);
+    setDownloadStatus(null);
   }
 
   async function fetchVideoDetails() {
@@ -73,6 +72,7 @@ function App() {
   }, [url]);
 
   async function downloadVideo() {
+    setDownloadStatus('started');
     try {
       const response = await fetch('/download', {
         method: 'POST',
@@ -89,7 +89,7 @@ function App() {
       const result = await response.json();
 
       if (result.success == true) {
-        setDownloadCompleted(true);
+        setDownloadStatus('completed');
       } else {
         setDownloadErrorMessage(result.videoMessage);
       }
@@ -193,7 +193,7 @@ function App() {
                       key={quality.format_id}
                       value={quality.height}
                       onClick={() => {
-                        setIsClicked(true);
+                        setHasAudio(quality.hasAudio);
                         setSelectedFormat(quality.format_id);
                       }}
                       className={`rounded-xl p-3.5 text-left transition-all border ${
@@ -215,13 +215,20 @@ function App() {
                   ))}
                 </div>
 
-                {downloadCompleted && (
+                {downloadStatus && (
                   <div className='rounded-xl border border-gray-300 bg-gray-100 flex flex-col gap-1 p-3 mb-3'>
-                    <p className='font-semibold text-green-700'>
-                      Download Completed
+                    <p className='font-semibold text-green-800'>
+                      {downloadStatus == 'started' ? (
+                        <span className='text-black'>Download Started...</span>
+                      ) : (
+                        'Download Completed'
+                      )}
                     </p>
+
                     <p className='text-gray-800'>
-                      Your download has been completed successfully.
+                      {downloadStatus == 'started'
+                        ? 'Your download is in progress.'
+                        : 'Your download has been completed successfully.'}
                     </p>
                   </div>
                 )}
@@ -239,8 +246,8 @@ function App() {
 
                 <button
                   onClick={() => {
+                    setDownloadStatus(null);
                     downloadVideo();
-                    setDownloadCompleted(false);
                   }}
                   disabled={!selectedFormat}
                   className='w-full bg-red-600 disabled:bg-red-400 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-2xl flex items-center justify-center gap-2 transition-colors cursor-pointer disabled:cursor-not-allowed shadow-lg shadow-red-200'
