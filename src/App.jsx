@@ -305,17 +305,16 @@ function App() {
 
         {/* Features */}
         <div className='max-w-2xl mx-auto space-y-4 mt-8'>
-          {/* Fast Conversion */}
+          {/* Fast Download */}
           <div className='bg-white shadow-xs rounded-2xl p-6 border border-red-100/50'>
             <div className='w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center mb-3 text-white'>
               <ZapIcon />
             </div>
             <h3 className='text-lg font-bold text-gray-900 mb-1'>
-              Fast Conversion
+              Fast Download
             </h3>
             <p className='text-gray-600 text-sm leading-relaxed'>
-              Instant processing for any length of video directly in your
-              browser.
+              Instant download for any video of any length
             </p>
           </div>
 
