@@ -28,7 +28,7 @@ A simple web application that allows users to download videos from various socia
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/yourusername/video-downloader.git
+git clone https://github.com/Kim-berlyA/video-downloader.git
 cd video-downloader
 ```
 
