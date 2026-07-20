@@ -1,35 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Youtube Video Downloader</title>
-</head>
-<body>
-  <header>
-    <h2>SaveNow</h2>
-  </header>
-
-  <div class='hero card'>
-    <h1>Download Youtube videos</h1>
-    <form action="" method="post">
-      <input type="text" placeholder='Paste your video url...' class='url-input'>
-      <button type="submit" class='btn url'>
-        Show Quality Options
-      </button>
-    </form>
-  </div>
-
-  <div class='cards'>
-    <div class='card'></div>
-    <div class='card'></div>
-    <div class='card'></div>
-  </div>
-
-  <footer>
-    <span>SaveNow</span>
-    <span>© 2026 SaveNow</span>
-  </footer>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>video-downloader</title>
+  </head>
+  <body class='min-h-screen flex flex-col bg-[#fff4f2] text-gray-800 font-sans'>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
